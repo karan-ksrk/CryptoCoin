@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <title id='title'> DOGCOIN </title>
+</head>
+
+<div class="container-sm">
+    <div class="row">
+        <div class="col-6 mx-auto mt-5">
+
+            <h1 class="lead display-2">
+                USDT
+            </h1>
+        </div>
+        <div class="col-6 mx-auto mt-5">
+            <h1 class="lead display-2">
+                INR
+            </h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6 mx-auto mt-5">
+            <h1>
+                <span id="binance">0.00</span>
+            </h1>
+        </div>
+        <div class="col-6 mx-auto mt-5">
+            <h1>
+                <span id="wazir">0.00</span>
+            </h1>
+        </div>
+    </div>
+</div>
+<script>
+
+    var socket1 = new WebSocket('wss://ws-ap2.pusher.com/app/47bd0a9591a05c2a66db?protocol=7&client=js&version=4.4.0&flash=false'
+    )
+    socket1.onopen = function (event) {
+        console.log('WebSocket is connected.')
+        socket1.send('{"event": "pusher:subscribe","data": {"channel": "market-dogeinr-global"}}')
+    }
+    socket1.onmessage = function (event) {
+        var response = JSON.parse(event.data)
+        console.log(response)
+        if (response.event == 'trades') {
+            data = JSON.parse(response.data)
+            document.querySelector('#wazir').innerText = data.trades[0].price
+        }
+    };
+
+    var socket2 = new WebSocket('wss://stream.binance.com/stream')
+    socket2.onopen = function (event) {
+        console.log('WebSocket is connected.')
+        socket2.send('{"method": "SUBSCRIBE", "params": ["!miniTicker@arr@3000ms", "dogeusdt@aggTrade", "dogeusdt@depth", "dogeusdt@kline_1d"], "id": 2}')
+    }
+    socket2.onmessage = function (event) {
+        var response = JSON.parse(event.data)
+        if (response.stream == 'dogeusdt@aggTrade') {
+            var price = response.data.p;
+            document.querySelector('#title').innerText = price;
+            document.querySelector('#binance').innerText = price;
+        }
+    };
+
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
+    crossorigin="anonymous"></script>
+
+<body>
+
+</body>
+
+</html>
