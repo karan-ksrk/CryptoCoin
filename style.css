@@ -1,0 +1,26 @@
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #fcfbfb;
+}
+.container {
+  margin-top: 10%;
+  display: flex;
+  -webkit-box-shadow: 3px 9px 22px -5px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 3px 9px 22px -5px rgba(0, 0, 0, 0.75);
+  box-shadow: 3px 9px 22px -5px rgba(0, 0, 0, 0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.table-head {
+  background-color: black;
+  color: white;
+}
+
+.gif img {
+  height: 100%;
+  width: 100%;
+  margin-left: 20px;
+}

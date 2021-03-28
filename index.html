@@ -9,12 +9,13 @@
         integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous" />
     <title id="title">DOGCOIN</title>
     <link rel="icon" href="icon.png" type="image/x-icon" />
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <div class="container">
     <table class="table">
         <thead>
-            <tr>
+            <tr class="table-head">
                 <th scope="col">Coins</th>
                 <th scope="col">USDT</th>
                 <th scope="col">INR</th>
@@ -38,12 +39,12 @@
             </tr>
         </tbody>
     </table>
-    <div class="row">
-        <div class="col-6 mx-auto mt-5">
-            <img src="DancingDoge.gif" class="rounded" alt="..." />
-        </div>
+    <div class="gif">
+        <img src="DancingDoge.gif"  alt="..."/>
     </div>
 </div>
+
+
 <script>
     var socket1 = new WebSocket(
         "wss://ws-ap2.pusher.com/app/47bd0a9591a05c2a66db?protocol=7&client=js&version=4.4.0&flash=false"
